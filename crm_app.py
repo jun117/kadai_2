@@ -37,7 +37,8 @@ def register_user(name, age):
     conn = psycopg2.connect(dsn)
     cur = conn.cursor()
 
-    sql = f"INSERT INTO users (name,age)VALUES(%(name)s,%(age)s)"
+    sql = "INSERT INTO users (name, age) VALUES (%(name)s, %(age)s)"
+
     cur.execute(sql, {'name': name, 'age': age})
     conn.commit()
 
@@ -66,40 +67,28 @@ def welcome_print():
 def main():
     init_db()
     welcome_print()
-    users = all_users()
+    # users = all_users()
 
-    if input('Your command>') == 'S':
-        print(f"Name:{users[0][0]} Age:{users[0][1]}")
-        print(f"Name:{users[1][0]} Age:{users[1][1]}")
-        print(f"Name:{users[2][0]} Age:{users[2][1]}")
-    else:
-        print("No data")
+    while True:
+        # users = all_users()
 
-    if input('Your command>') == 'A':
-        name = 'Kazuma'
-        age = 35
-        register_user(name, age)
-        print(f"NEW user name >{users[3][0]}")
-        print(f"NEW usSer age >{users[3][1]}")
-        print(f"Add new user :{name}")
-    else:
-        print("No data")
-    if input('Your command>') == 'S':
-        register_user(name, age)
-        print(f"Name:{users[0][0]} Age:{users[0][1]}")
-        print(f"Name:{users[1][0]} Age:{users[1][1]}")
-        print(f"Name:{users[2][0]} Age:{users[2][1]}")
-        print(f"Name:{users[3][0]} Age:{users[3][1]}")
-    else:
-        print("No data")
-    if input('Your command>') == 'X':
-        print(f"X:command not found")
-    else:
-        print("No data")
-    if input('Your command>') == 'Q':
-        print("Bye!")
-    else:
-        input("No data")
+        command = input('Your command>')
+        if command == 'S':
+            users = all_users()
+            for user in users:
+                print(f"Name:{user[0]} Age:{user[1]}")
+
+        elif command == 'A':
+            name = input(f"New user name>")
+            age = input(f"New user age>")
+            register_user(name, age)
+            print(f"Add new user :{name}")
+
+        elif command == 'X':
+            print(f"X:command not found")
+        elif command == 'Q':
+            print("Bye!")
+            break
 
 
 if __name__ == '__main__':
