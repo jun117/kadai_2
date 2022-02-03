@@ -82,6 +82,7 @@ def main():
             name = input(f"New user name>")
             age = input(f"New user age>")
             register_user(name, age)
+
             print(f"Add new user :{name}")
 
         elif command == 'X':
