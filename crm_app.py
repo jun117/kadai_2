@@ -86,10 +86,13 @@ def main():
 
         elif command == 'X':
             print(f"X:command not found")
+
         elif command == 'Q':
             print("Bye!")
             break
 
+        else:
+            print(f"X:command not found")
 
 if __name__ == '__main__':
     main()
